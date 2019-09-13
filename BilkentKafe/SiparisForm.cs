@@ -58,5 +58,40 @@ namespace BilkentKafe
             // Siparis penceresesini kapatarak anasayfaya geri dön
             Close();
         }
+
+        private void btnSiparisIptal_Click(object sender, EventArgs e)
+        {
+            DialogResult dr = MessageBox.Show(
+                "Siparişi iptal etmek istediğinize emin misiniz?",
+                "Sipariş iptal onayı",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning,
+                MessageBoxDefaultButton.Button2
+            );
+
+            if(dr == DialogResult.Yes)
+            {
+                db.MasayiKapat(siparis.MasaNo, SiparisDurum.Iptal);
+                Close();
+            }
+
+        }
+
+        private void btnOdemeAl_Click(object sender, EventArgs e)
+        {
+            DialogResult dr = MessageBox.Show(
+                $"{siparis.ToplamTutarTL} tahsil edildiyse sipariş kapatılacaktır. Onaylıyor musunuz?",
+                "Ödeme Alındı Onay",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Exclamation,
+                MessageBoxDefaultButton.Button2
+            );
+
+            if (dr == DialogResult.Yes)
+            {
+                db.MasayiKapat(siparis.MasaNo, SiparisDurum.Odendi);
+                Close();
+            }
+        }
     }
 }

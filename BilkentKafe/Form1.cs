@@ -16,7 +16,7 @@ namespace BilkentKafe
 {
     public partial class Form1 : Form
     {
-        int masaAdet = 20;
+        int masaAdet = 21;
         KafeVeri db;
         public Form1()
         {
@@ -76,6 +76,8 @@ namespace BilkentKafe
             // ve ilgili masanın sipariş formunu aç
             SiparisForm siparisForm = new SiparisForm(db, siparis);
             siparisForm.ShowDialog();
+
+            if(siparis.Durum != SiparisDurum.Aktif) tiklanan.ImageKey = "bos";
         }
 
         private void VerileriYaz()
